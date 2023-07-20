@@ -1,7 +1,9 @@
 import Header from "./Header";
 import Main from "./Main";
 import Footer from "./Footer";
-//import "./App.css";
+import closeIcon from "../images/svg/svg_close.svg";
+import trashIcon from "../images/svg/svg_trash.svg";
+import likeIcon from "../images/svg/svg_like.svg";
 
 function App() {
   return (
@@ -19,14 +21,14 @@ function App() {
             <button className="button button_close" type="button">
               <img
                 className="img img_button_close"
-                src="<%=require('./images/svg/svg_close.svg')%>"
+                src={closeIcon}
                 alt="Ícone em forma de um X para fechar a janela de edição de perfil"
               />
             </button>
             <form
               className="popup__form popup__form_profile"
               name="editProfile"
-              novalidate
+              noValidate
             >
               <h2 className="popup__title">Editar perfil</h2>
               <fieldset className="popup__input-container">
@@ -36,8 +38,8 @@ function App() {
                   required
                   type="text"
                   placeholder="Nome"
-                  minlength="2"
-                  maxlength="40"
+                  minLength="2"
+                  maxLength="40"
                 />
                 <span className="name-input-error"></span>
               </fieldset>
@@ -48,8 +50,8 @@ function App() {
                   required
                   type="text"
                   placeholder="Sobre mim"
-                  minlength="2"
-                  maxlength="200"
+                  minLength="2"
+                  maxLength="200"
                 />
                 <span className="about-input-error"></span>
               </fieldset>
@@ -67,22 +69,22 @@ function App() {
             <button className="button button_close" type="button">
               <img
                 className="img img_button_close"
-                src="<%=require('./images/svg/svg_close.svg')%>"
+                src={closeIcon}
                 alt="Ícone em forma de um X para fechar a janela de edição de perfil"
               />
             </button>
             <form
               className="popup__form popup__form_place"
               name="addPlace"
-              novalidate
+              noValidate
             >
               <h2 className="popup__title">Novo local</h2>
               <fieldset className="popup__input-container">
                 <input
                   id="title-input"
                   className="popup__input popup__input_type_place"
-                  maxlength="30"
-                  minlength="2"
+                  maxLength="30"
+                  minLength="2"
                   required
                   type="text"
                   placeholder="Título"
@@ -116,7 +118,7 @@ function App() {
           <div className="popup__container">
             <button className="button button_close" type="button">
               <img
-                src="<%=require('./images/svg/svg_close.svg')%>"
+                src={closeIcon}
                 alt="Ícone em form de um X para fechar a janela de confirmação de exclusão de cartão"
                 className="img img_button_close"
               />
@@ -145,14 +147,14 @@ function App() {
             <button className="button button_close" type="button">
               <img
                 className="img img_button_close"
-                src="<%=require('./images/svg/svg_close.svg')%>"
+                src={closeIcon}
                 alt="Ícone em forma de um X para fechar a janela de edição de perfil"
               />
             </button>
             <form
               className="popup__form popup__form_place"
               name="changeAvatar"
-              novalidate
+              noValidate
             >
               <h2 className="popup__title">Alterar a foto do perfil</h2>
               <fieldset className="popup__input-container">
@@ -185,7 +187,7 @@ function App() {
             <button className="button button_trash" type="button">
               <img
                 className="button__image"
-                src="<%=require('./images/svg/svg_trash.svg')%>"
+                src={trashIcon}
                 alt="Ícone de uma lixeira do botão de excluir postagem"
               />
             </button>
@@ -198,7 +200,7 @@ function App() {
             <button className="button" type="button">
               <img
                 className="button__like button__like_active"
-                src="<%=require('./images/svg/svg_like.svg')%>"
+                src={likeIcon}
                 alt="Ícone de coração do botão curtir"
               />
               <span className="button__count"></span>
@@ -217,7 +219,7 @@ function App() {
           >
             <img
               className="img img_button_close"
-              src="<%=require('./images/svg/svg_close.svg')%>"
+              src={closeIcon}
               alt="Ícone em forma de um X para fechar a janela de edição de perfil"
             />
           </button>

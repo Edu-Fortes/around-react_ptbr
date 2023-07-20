@@ -1,8 +1,11 @@
-export default function Main() {
-  function handleEditAvatarClick() {}
-  function handleEditProfileClick() {}
-  function handleAddPlaceClick() {}
+import pencilIcon from "../images/svg/svg_pencil.svg";
+import plusIcon from "../images/svg/svg_plus.svg";
 
+function handleEditAvatarClick() {}
+function handleEditProfileClick() {}
+function handleAddPlaceClick() {}
+
+export default function Main() {
   return (
     <main className="main">
       <section className="profile">
@@ -16,7 +19,7 @@ export default function Main() {
               <button className="button button_edit" type="button">
                 <img
                   className="img img_button_edit"
-                  src="<%=require('./images/svg/svg_pencil.svg')%>"
+                  src={pencilIcon}
                   alt="Ícone de um lápis para editar o perfil"
                 />
               </button>
@@ -29,7 +32,7 @@ export default function Main() {
         <button className="button button_add" type="button">
           <img
             className="img img_button_add"
-            src="<%=require('./images/svg/svg_plus.svg')%>"
+            src={plusIcon}
             alt="ícone do sinal de adição do botão de Adicionar"
           />
         </button>
