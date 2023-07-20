@@ -64,7 +64,7 @@ function App() {
 
         {/* MODAL ADICIONAR CARD */}
 
-        <section id="add-card-modal" className="popup popup_opened">
+        <section id="addCard-modal" className="popup popup_opened">
           <div className="popup__container">
             <button className="button button_close" type="button">
               <img

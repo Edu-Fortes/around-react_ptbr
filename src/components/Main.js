@@ -1,9 +1,15 @@
 import pencilIcon from "../images/svg/svg_pencil.svg";
 import plusIcon from "../images/svg/svg_plus.svg";
 
-function handleEditAvatarClick() {}
-function handleEditProfileClick() {}
-function handleAddPlaceClick() {}
+function handleEditAvatarClick() {
+  document.querySelector("#avatar-modal").classList.add("popup_opened");
+}
+function handleEditProfileClick() {
+  document.querySelector("#profile-modal").classList.add("popup_opened");
+}
+function handleAddPlaceClick() {
+  document.querySelector("#addCard-modal").classList.add("popup_opened");
+}
 
 export default function Main() {
   return (
@@ -11,13 +17,22 @@ export default function Main() {
       <section className="profile">
         <div className="profile__item">
           <figure className="profile__fig">
-            <img className="img img_avatar" alt="Foto do perfil do usuário" />
+            <img
+              onClick={handleEditAvatarClick}
+              className="img img_avatar"
+              alt="Foto do perfil do usuário"
+            />
           </figure>
           <ul className="profile__description">
             <li className="list-container">
               <h1 className="profile__title"></h1>
-              <button className="button button_edit" type="button">
+              <button
+                onClick={handleEditProfileClick}
+                className="button button_edit"
+                type="button"
+              >
                 <img
+                  onClick={handleEditProfileClick}
                   className="img img_button_edit"
                   src={pencilIcon}
                   alt="Ícone de um lápis para editar o perfil"
@@ -29,8 +44,13 @@ export default function Main() {
             </li>
           </ul>
         </div>
-        <button className="button button_add" type="button">
+        <button
+          onClick={handleAddPlaceClick}
+          className="button button_add"
+          type="button"
+        >
           <img
+            onClick={handleAddPlaceClick}
             className="img img_button_add"
             src={plusIcon}
             alt="ícone do sinal de adição do botão de Adicionar"
