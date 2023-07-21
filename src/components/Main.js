@@ -2,13 +2,13 @@ import pencilIcon from "../images/svg/svg_pencil.svg";
 import plusIcon from "../images/svg/svg_plus.svg";
 
 function handleEditAvatarClick() {
-  document.querySelector("#avatar-modal").classList.add("popup_opened");
+  document.querySelector("#avatar").classList.add("popup_opened");
 }
 function handleEditProfileClick() {
-  document.querySelector("#profile-modal").classList.add("popup_opened");
+  document.querySelector("#profile").classList.add("popup_opened");
 }
 function handleAddPlaceClick() {
-  document.querySelector("#addCard-modal").classList.add("popup_opened");
+  document.querySelector("#addPic").classList.add("popup_opened");
 }
 
 export default function Main() {
