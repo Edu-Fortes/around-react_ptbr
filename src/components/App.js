@@ -4,6 +4,9 @@ import Footer from "./Footer";
 import closeIcon from "../images/svg/svg_close.svg";
 import trashIcon from "../images/svg/svg_trash.svg";
 import likeIcon from "../images/svg/svg_like.svg";
+import PopupWithForm from "./PopupWithForm";
+import Fieldset from "./Fieldset";
+import { form } from "../utils/constants";
 
 function App() {
   return (
@@ -13,136 +16,27 @@ function App() {
         <hr className="hrz-ruler" />
         <Main />
         <Footer />
-
-        {/* MODAL EDITAR PERFIL */}
-
-        <section id="profile-modal" className="popup popup_opened">
-          <div className="popup__container">
-            <button className="button button_close" type="button">
-              <img
-                className="img img_button_close"
-                src={closeIcon}
-                alt="Ícone em forma de um X para fechar a janela de edição de perfil"
-              />
-            </button>
-            <form
-              className="popup__form popup__form_profile"
-              name="editProfile"
-              noValidate
-            >
-              <h2 className="popup__title">Editar perfil</h2>
-              <fieldset className="popup__input-container">
-                <input
-                  id="name-input"
-                  className="popup__input popup__input_type_name"
-                  required
-                  type="text"
-                  placeholder="Nome"
-                  minLength="2"
-                  maxLength="40"
-                />
-                <span className="name-input-error"></span>
-              </fieldset>
-              <fieldset className="popup__input-container">
-                <input
-                  id="about-input"
-                  className="popup__input popup__input_type_about"
-                  required
-                  type="text"
-                  placeholder="Sobre mim"
-                  minLength="2"
-                  maxLength="200"
-                />
-                <span className="about-input-error"></span>
-              </fieldset>
-              <button className="button button_save" type="submit">
-                Salvar
-              </button>
-            </form>
-          </div>
-        </section>
-
-        {/* MODAL ADICIONAR CARD */}
-
-        <section id="addCard-modal" className="popup popup_opened">
-          <div className="popup__container">
-            <button className="button button_close" type="button">
-              <img
-                className="img img_button_close"
-                src={closeIcon}
-                alt="Ícone em forma de um X para fechar a janela de edição de perfil"
-              />
-            </button>
-            <form
-              className="popup__form popup__form_place"
-              name="addPlace"
-              noValidate
-            >
-              <h2 className="popup__title">Novo local</h2>
-              <fieldset className="popup__input-container">
-                <input
-                  id="title-input"
-                  className="popup__input popup__input_type_place"
-                  maxLength="30"
-                  minLength="2"
-                  required
-                  type="text"
-                  placeholder="Título"
-                />
-                <span className="title-input-error"></span>
-              </fieldset>
-              <fieldset className="popup__input-container">
-                <input
-                  id="url-input"
-                  className="popup__input popup__input_type_img"
-                  required
-                  type="url"
-                  placeholder="Link de imagem"
-                />
-                <span className="url-input-error"></span>
-              </fieldset>
-              <button
-                name="create"
-                className="button button_save"
-                type="submit"
-              >
-                Criar
-              </button>
-            </form>
-          </div>
-        </section>
-
-        {/* MODAL TO DELETE CARD */}
-
-        <section id="modal-delete" className="popup popup_opened">
-          <div className="popup__container">
-            <button className="button button_close" type="button">
-              <img
-                src={closeIcon}
-                alt="Ícone em form de um X para fechar a janela de confirmação de exclusão de cartão"
-                className="img img_button_close"
-              />
-            </button>
-            <form name="deleteAlert" className="popup__form popup__form_delete">
-              <h2 className="popup__title">Tem certeza?</h2>
-              <button className="button button_yes" type="submit">
-                Sim
-              </button>
-            </form>
-          </div>
-        </section>
+        <PopupWithForm {...form.profile}>
+          <Fieldset {...form.profile.nameInput} />
+          <Fieldset {...form.profile.aboutInput} />
+        </PopupWithForm>
+        <PopupWithForm {...form.addPlace}>
+          <Fieldset {...form.addPlace.titleInput} />
+          <Fieldset {...form.addPlace.urlInput} />
+        </PopupWithForm>
+        <PopupWithForm {...form.changeAvatar}>
+          <Fieldset {...form.changeAvatar.input} />
+        </PopupWithForm>
+        <PopupWithForm {...form.deleteAlert} />
 
         {/* MODAL LOADING */}
-
-        <section id="modal-loading" className="popup popup_opened">
+        <section id="modal-loading" className="popup">
           <div className="popup__container popup__container_loading">
             <div className="popup__spinner"></div>
           </div>
         </section>
-
         {/* MODAL TO CHANGE USER AVATAR */}
-
-        <section id="avatar-modal" className="popup popup_opened">
+        <section id="avatar-modal" className="popup">
           <div className="popup__container">
             <button className="button button_close" type="button">
               <img
@@ -211,7 +105,7 @@ function App() {
 
       {/* MODAL ZOOM PHOTOS */}
 
-      <section id="modal-photo" className="popup popup_opened">
+      <section id="modal-photo" className="popup">
         <div className="popup__photo-container">
           <button
             className="button button_close button_close_photo"
