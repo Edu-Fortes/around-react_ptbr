@@ -1,24 +1,19 @@
 import pencilIcon from "../images/svg/svg_pencil.svg";
 import plusIcon from "../images/svg/svg_plus.svg";
 
-function handleEditAvatarClick() {
-  document.querySelector("#avatar").classList.add("popup_opened");
-}
-function handleEditProfileClick() {
-  document.querySelector("#profile").classList.add("popup_opened");
-}
-function handleAddPlaceClick() {
-  document.querySelector("#addPic").classList.add("popup_opened");
-}
-
-export default function Main() {
+export default function Main({
+  onEditProfileClick,
+  onAddPlaceClick,
+  onEditAvatarClick,
+  onCardClick,
+}) {
   return (
     <main className="main">
       <section className="profile">
         <div className="profile__item">
           <figure className="profile__fig">
             <img
-              onClick={handleEditAvatarClick}
+              onClick={onEditAvatarClick}
               className="img img_avatar"
               alt="Foto do perfil do usuário"
             />
@@ -27,12 +22,12 @@ export default function Main() {
             <li className="list-container">
               <h1 className="profile__title"></h1>
               <button
-                onClick={handleEditProfileClick}
+                onClick={onEditProfileClick}
                 className="button button_edit"
                 type="button"
               >
                 <img
-                  onClick={handleEditProfileClick}
+                  onClick={onEditProfileClick}
                   className="img img_button_edit"
                   src={pencilIcon}
                   alt="Ícone de um lápis para editar o perfil"
@@ -45,12 +40,12 @@ export default function Main() {
           </ul>
         </div>
         <button
-          onClick={handleAddPlaceClick}
+          onClick={onAddPlaceClick}
           className="button button_add"
           type="button"
         >
           <img
-            onClick={handleAddPlaceClick}
+            onClick={onAddPlaceClick}
             className="img img_button_add"
             src={plusIcon}
             alt="ícone do sinal de adição do botão de Adicionar"

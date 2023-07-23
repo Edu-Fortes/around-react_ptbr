@@ -7,24 +7,43 @@ import likeIcon from "../images/svg/svg_like.svg";
 import PopupWithForm from "./PopupWithForm";
 import Fieldset from "./Fieldset";
 import { form } from "../utils/constants";
+import { useState } from "react";
 
 function App() {
+  const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = useState();
+  const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = useState();
+  const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = useState();
+
+  function handleEditAvatarClick() {
+    setIsEditAvatarPopupOpen(!isEditAvatarPopupOpen);
+  }
+  function handleEditProfileClick() {
+    setIsEditProfilePopupOpen(!isEditProfilePopupOpen);
+  }
+  function handleAddPlaceClick() {
+    setIsAddPlacePopupOpen(!isAddPlacePopupOpen);
+  }
+
   return (
     <>
       <div className="page__container">
         <Header />
         <hr className="hrz-ruler" />
-        <Main />
+        <Main
+          onEditProfileClick={handleEditProfileClick}
+          onAddPlaceClick={handleAddPlaceClick}
+          onEditAvatarClick={handleEditAvatarClick}
+        />
         <Footer />
-        <PopupWithForm {...form.profile}>
+        <PopupWithForm isOpen={isEditProfilePopupOpen} {...form.profile}>
           <Fieldset {...form.profile.nameInput} />
           <Fieldset {...form.profile.aboutInput} />
         </PopupWithForm>
-        <PopupWithForm {...form.addPlace}>
+        <PopupWithForm isOpen={isAddPlacePopupOpen} {...form.addPlace}>
           <Fieldset {...form.addPlace.titleInput} />
           <Fieldset {...form.addPlace.urlInput} />
         </PopupWithForm>
-        <PopupWithForm {...form.changeAvatar}>
+        <PopupWithForm isOpen={isEditAvatarPopupOpen} {...form.changeAvatar}>
           <Fieldset {...form.changeAvatar.input} />
         </PopupWithForm>
         <PopupWithForm {...form.deleteAlert} />
@@ -33,42 +52,6 @@ function App() {
         <section id="modal-loading" className="popup">
           <div className="popup__container popup__container_loading">
             <div className="popup__spinner"></div>
-          </div>
-        </section>
-        {/* MODAL TO CHANGE USER AVATAR */}
-        <section id="avatar-modal" className="popup">
-          <div className="popup__container">
-            <button className="button button_close" type="button">
-              <img
-                className="img img_button_close"
-                src={closeIcon}
-                alt="Ícone em forma de um X para fechar a janela de edição de perfil"
-              />
-            </button>
-            <form
-              className="popup__form popup__form_place"
-              name="changeAvatar"
-              noValidate
-            >
-              <h2 className="popup__title">Alterar a foto do perfil</h2>
-              <fieldset className="popup__input-container">
-                <input
-                  id="avatar-input"
-                  className="popup__input popup__input_type_img"
-                  required
-                  type="url"
-                  placeholder="Link de imagem"
-                />
-                <span className="avatar-input-error"></span>
-              </fieldset>
-              <button
-                name="avatar"
-                className="button button_save"
-                type="submit"
-              >
-                Salvar
-              </button>
-            </form>
           </div>
         </section>
       </div>
