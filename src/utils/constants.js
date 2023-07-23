@@ -43,6 +43,7 @@ const form = {
     name: "avatar",
     title: "Alterar a foto do perfil",
     btnText: "Salvar",
+    // isOpen: "false",
     input: {
       id: "avatar-input",
       className: "img",

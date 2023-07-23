@@ -1,9 +1,15 @@
 import closeIcon from "../images/svg/svg_close.svg";
 
-export default function PopupWithForm({ title, name, btnText, children }) {
+export default function PopupWithForm({
+  title,
+  name,
+  btnText,
+  isOpen,
+  children,
+}) {
   return (
     <>
-      <section id={name} className="popup">
+      <section id={name} className={isOpen ? "popup popup_opened" : "popup"}>
         <div className="popup__container">
           <button className="button button_close" type="button">
             <img
