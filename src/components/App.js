@@ -23,6 +23,11 @@ function App() {
   function handleAddPlaceClick() {
     setIsAddPlacePopupOpen(!isAddPlacePopupOpen);
   }
+  function closeAllPopups() {
+    setIsEditProfilePopupOpen(false);
+    setIsAddPlacePopupOpen(false);
+    setIsEditAvatarPopupOpen(false);
+  }
 
   return (
     <>
@@ -35,15 +40,27 @@ function App() {
           onEditAvatarClick={handleEditAvatarClick}
         />
         <Footer />
-        <PopupWithForm isOpen={isEditProfilePopupOpen} {...form.profile}>
+        <PopupWithForm
+          onClose={closeAllPopups}
+          isOpen={isEditProfilePopupOpen}
+          {...form.profile}
+        >
           <Fieldset {...form.profile.nameInput} />
           <Fieldset {...form.profile.aboutInput} />
         </PopupWithForm>
-        <PopupWithForm isOpen={isAddPlacePopupOpen} {...form.addPlace}>
+        <PopupWithForm
+          onClose={closeAllPopups}
+          isOpen={isAddPlacePopupOpen}
+          {...form.addPlace}
+        >
           <Fieldset {...form.addPlace.titleInput} />
           <Fieldset {...form.addPlace.urlInput} />
         </PopupWithForm>
-        <PopupWithForm isOpen={isEditAvatarPopupOpen} {...form.changeAvatar}>
+        <PopupWithForm
+          onClose={closeAllPopups}
+          isOpen={isEditAvatarPopupOpen}
+          {...form.changeAvatar}
+        >
           <Fieldset {...form.changeAvatar.input} />
         </PopupWithForm>
         <PopupWithForm {...form.deleteAlert} />

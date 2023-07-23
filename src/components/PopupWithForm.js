@@ -5,6 +5,7 @@ export default function PopupWithForm({
   name,
   btnText,
   isOpen,
+  onClose,
   children,
 }) {
   return (
@@ -14,8 +15,9 @@ export default function PopupWithForm({
           <button className="button button_close" type="button">
             <img
               src={closeIcon}
-              alt="Ícone em form de um X para fechar a janela de confirmação de exclusão de cartão"
+              alt="Ícone em form de um X para fechar a janela do formulário"
               className="img img_button_close"
+              onClick={onClose}
             />
           </button>
           <form name={name} className={`popup__form popup__form_${name}`}>
