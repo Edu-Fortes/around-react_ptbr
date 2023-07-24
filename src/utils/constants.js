@@ -1,3 +1,13 @@
+//paths to complete API Base URL
+const urlPaths = {
+  baseUrl: "https://around.nomoreparties.co/v1/web_ptbr_04",
+  authorization: "f76476c9-9b53-4968-99fe-a8b4cbde5202",
+  user: "users/me",
+  cards: "cards",
+  likes: "cards/likes",
+  changeAvatar: "users/me/avatar",
+};
+//forms configuration
 const form = {
   profile: {
     name: "profile",
@@ -58,4 +68,4 @@ const form = {
   },
 };
 
-export { form };
+export { urlPaths, form };

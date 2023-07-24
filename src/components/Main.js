@@ -1,5 +1,6 @@
 import pencilIcon from "../images/svg/svg_pencil.svg";
 import plusIcon from "../images/svg/svg_plus.svg";
+import { useState } from "react";
 
 export default function Main({
   onEditProfileClick,
@@ -7,6 +8,11 @@ export default function Main({
   onEditAvatarClick,
   onCardClick,
 }) {
+  //state variables
+  const [userName, setUserName] = useState();
+  const [userDescription, setUserDescription] = useState();
+  const [userAvatar, setUserAvatar] = useState();
+
   return (
     <main className="main">
       <section className="profile">
@@ -20,7 +26,7 @@ export default function Main({
           </figure>
           <ul className="profile__description">
             <li className="list-container">
-              <h1 className="profile__title"></h1>
+              <h1 className="profile__title">{userName}</h1>
               <button
                 onClick={onEditProfileClick}
                 className="button button_edit"
