@@ -1,6 +1,8 @@
 import pencilIcon from "../images/svg/svg_pencil.svg";
 import plusIcon from "../images/svg/svg_plus.svg";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { api } from "../utils/api";
+import { urlPaths } from "../utils/constants";
 
 export default function Main({
   onEditProfileClick,
@@ -8,10 +10,20 @@ export default function Main({
   onEditAvatarClick,
   onCardClick,
 }) {
-  //state variables
+  //user data state variables
   const [userName, setUserName] = useState();
   const [userDescription, setUserDescription] = useState();
   const [userAvatar, setUserAvatar] = useState();
+
+  //fetch API to get user data
+  useEffect(() => {
+    const user = api.get(urlPaths.user);
+    user.then((res) => {
+      setUserName(res.name);
+      setUserDescription(res.about);
+      setUserAvatar(res.avatar);
+    });
+  }, []);
 
   return (
     <main className="main">
@@ -19,6 +31,9 @@ export default function Main({
         <div className="profile__item">
           <figure className="profile__fig">
             <img
+              //pedaço de código sugerido pela TripleTen, para alterar a imagem do avatar
+              // style={{ backgroundImage: `url(${userAvatar})` }}
+              src={userAvatar}
               onClick={onEditAvatarClick}
               className="img img_avatar"
               alt="Foto do perfil do usuário"
@@ -41,7 +56,7 @@ export default function Main({
               </button>
             </li>
             <li>
-              <h2 className="profile__subtitle"></h2>
+              <h2 className="profile__subtitle">{userDescription}</h2>
             </li>
           </ul>
         </div>
