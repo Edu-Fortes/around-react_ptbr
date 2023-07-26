@@ -24,11 +24,13 @@ export default function Main({
   useEffect(() => {
     const user = api.get(urlPaths.user);
     const cardsList = api.get(urlPaths.cards);
+
     user.then((res) => {
       setUserName(res.name);
       setUserDescription(res.about);
       setUserAvatar(res.avatar);
     });
+
     cardsList.then((res) => {
       setCards(res);
     });
@@ -40,8 +42,6 @@ export default function Main({
         <div className="profile__item">
           <figure className="profile__fig">
             <img
-              //pedaço de código sugerido pela TripleTen, para alterar a imagem do avatar
-              // style={{ backgroundImage: `url(${userAvatar})` }}
               src={userAvatar}
               onClick={onEditAvatarClick}
               className="img img_avatar"
@@ -85,37 +85,41 @@ export default function Main({
 
       <section className="places">
         <ul className="place">
-          {cards.map((cards) => (
-            <li key={cards._id} className="place__card">
-              <div className="place__btn-container">
-                <button className="button button_trash" type="button">
+          {cards.map((card) => {
+            const likeCount = card.likes;
+
+            return (
+              <li key={card._id} className="place__card">
+                <div className="place__btn-container">
+                  <button className="button button_trash" type="button">
+                    <img
+                      className="button__image"
+                      src={trashIcon}
+                      alt="Ícone de uma lixeira do botão de excluir postagem"
+                    />
+                  </button>
+                </div>
+                <figure className="place__fig">
                   <img
-                    className="button__image"
-                    src={trashIcon}
-                    alt="Ícone de uma lixeira do botão de excluir postagem"
+                    className="img img_card"
+                    src={card.link}
+                    alt={`Imagem da postagem ${card.name}`}
                   />
-                </button>
-              </div>
-              <figure className="place__fig">
-                <img
-                  className="img img_card"
-                  src={cards.link}
-                  alt={`Imagem da postagem ${cards.name}`}
-                />
-              </figure>
-              <div className="place__content">
-                <h2 className="place__name">{cards.name}</h2>
-                <button className="button" type="button">
-                  <img
-                    className="button__like button__like_active"
-                    src={likeIcon}
-                    alt="Ícone de coração do botão curtir"
-                  />
-                  <span className="button__count"></span>
-                </button>
-              </div>
-            </li>
-          ))}
+                </figure>
+                <div className="place__content">
+                  <h2 className="place__name">{card.name}</h2>
+                  <button className="button" type="button">
+                    <img
+                      className="button__like button__like_active"
+                      src={likeIcon}
+                      alt="Ícone de coração do botão curtir"
+                    />
+                    <span className="button__count">{likeCount.length}</span>
+                  </button>
+                </div>
+              </li>
+            );
+          })}
         </ul>
       </section>
     </main>

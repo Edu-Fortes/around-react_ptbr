@@ -1,7 +1,6 @@
 import Header from "./Header";
 import Main from "./Main";
 import Footer from "./Footer";
-import closeIcon from "../images/svg/svg_close.svg";
 import trashIcon from "../images/svg/svg_trash.svg";
 import likeIcon from "../images/svg/svg_like.svg";
 import PopupWithForm from "./PopupWithForm";
@@ -40,6 +39,7 @@ function App() {
           onEditAvatarClick={handleEditAvatarClick}
         />
         <Footer />
+        {/* Modal to Edit Profile */}
         <PopupWithForm
           onClose={closeAllPopups}
           isOpen={isEditProfilePopupOpen}
@@ -48,6 +48,8 @@ function App() {
           <Fieldset {...form.profile.nameInput} />
           <Fieldset {...form.profile.aboutInput} />
         </PopupWithForm>
+
+        {/* Modal to Add New Place*/}
         <PopupWithForm
           onClose={closeAllPopups}
           isOpen={isAddPlacePopupOpen}
@@ -56,6 +58,8 @@ function App() {
           <Fieldset {...form.addPlace.titleInput} />
           <Fieldset {...form.addPlace.urlInput} />
         </PopupWithForm>
+
+        {/* Modal to Change user Avatar */}
         <PopupWithForm
           onClose={closeAllPopups}
           isOpen={isEditAvatarPopupOpen}
@@ -63,6 +67,8 @@ function App() {
         >
           <Fieldset {...form.changeAvatar.input} />
         </PopupWithForm>
+
+        {/* Delete Alert Modal */}
         <PopupWithForm {...form.deleteAlert} />
 
         {/* MODAL LOADING */}
