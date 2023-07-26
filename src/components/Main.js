@@ -1,5 +1,7 @@
 import pencilIcon from "../images/svg/svg_pencil.svg";
 import plusIcon from "../images/svg/svg_plus.svg";
+import trashIcon from "../images/svg/svg_trash.svg";
+import likeIcon from "../images/svg/svg_like.svg";
 import { useState, useEffect } from "react";
 import { api } from "../utils/api";
 import { urlPaths } from "../utils/constants";
@@ -15,13 +17,20 @@ export default function Main({
   const [userDescription, setUserDescription] = useState();
   const [userAvatar, setUserAvatar] = useState();
 
-  //fetch API to get user data
+  //card state variable
+  const [cards, setCards] = useState([]);
+
+  //fetch API to get user data and initial cards
   useEffect(() => {
     const user = api.get(urlPaths.user);
+    const cardsList = api.get(urlPaths.cards);
     user.then((res) => {
       setUserName(res.name);
       setUserDescription(res.about);
       setUserAvatar(res.avatar);
+    });
+    cardsList.then((res) => {
+      setCards(res);
     });
   }, []);
 
@@ -75,7 +84,39 @@ export default function Main({
       </section>
 
       <section className="places">
-        <ul className="place"></ul>
+        <ul className="place">
+          {cards.map((cards) => (
+            <li key={cards._id} className="place__card">
+              <div className="place__btn-container">
+                <button className="button button_trash" type="button">
+                  <img
+                    className="button__image"
+                    src={trashIcon}
+                    alt="Ícone de uma lixeira do botão de excluir postagem"
+                  />
+                </button>
+              </div>
+              <figure className="place__fig">
+                <img
+                  className="img img_card"
+                  src={cards.link}
+                  alt={`Imagem da postagem ${cards.name}`}
+                />
+              </figure>
+              <div className="place__content">
+                <h2 className="place__name">{cards.name}</h2>
+                <button className="button" type="button">
+                  <img
+                    className="button__like button__like_active"
+                    src={likeIcon}
+                    alt="Ícone de coração do botão curtir"
+                  />
+                  <span className="button__count"></span>
+                </button>
+              </div>
+            </li>
+          ))}
+        </ul>
       </section>
     </main>
   );
