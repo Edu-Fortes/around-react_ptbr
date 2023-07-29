@@ -5,6 +5,7 @@ import likeIcon from "../images/svg/svg_like.svg";
 import { useState, useEffect } from "react";
 import { api } from "../utils/api";
 import { urlPaths } from "../utils/constants";
+import Card from "./Card";
 
 export default function Main({
   onEditProfileClick,
@@ -85,41 +86,7 @@ export default function Main({
 
       <section className="places">
         <ul className="place">
-          {cards.map((card) => {
-            const likeCount = card.likes;
-
-            return (
-              <li key={card._id} className="place__card">
-                <div className="place__btn-container">
-                  <button className="button button_trash" type="button">
-                    <img
-                      className="button__image"
-                      src={trashIcon}
-                      alt="Ícone de uma lixeira do botão de excluir postagem"
-                    />
-                  </button>
-                </div>
-                <figure className="place__fig">
-                  <img
-                    className="img img_card"
-                    src={card.link}
-                    alt={`Imagem da postagem ${card.name}`}
-                  />
-                </figure>
-                <div className="place__content">
-                  <h2 className="place__name">{card.name}</h2>
-                  <button className="button" type="button">
-                    <img
-                      className="button__like button__like_active"
-                      src={likeIcon}
-                      alt="Ícone de coração do botão curtir"
-                    />
-                    <span className="button__count">{likeCount.length}</span>
-                  </button>
-                </div>
-              </li>
-            );
-          })}
+          <Card card={cards} />
         </ul>
       </section>
     </main>
