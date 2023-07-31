@@ -1,9 +1,9 @@
 import closeIcon from "../images/svg/svg_close.svg";
 
 export default function ImagePopup({ card, onClose }) {
-  console.log(card);
-  console.log(card.alt);
-  console.log(card.src);
+  const figAltString = String(card.alt);
+  const figCaption = figAltString.slice(18);
+
   return (
     <section id="modal-photo" className={card ? "popup popup_opened" : "popup"}>
       <div className="popup__photo-container">
@@ -19,8 +19,8 @@ export default function ImagePopup({ card, onClose }) {
           />
         </button>
         <figure className="popup__fig-container">
-          <img className="popup__img" src={card.src} />
-          <figcaption className="popup__figcaption"></figcaption>
+          <img className="popup__img" src={card.src} alt={card.alt} />
+          <figcaption className="popup__figcaption">{figCaption}</figcaption>
         </figure>
       </div>
     </section>

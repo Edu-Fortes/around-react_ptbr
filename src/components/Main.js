@@ -1,7 +1,5 @@
 import pencilIcon from "../images/svg/svg_pencil.svg";
 import plusIcon from "../images/svg/svg_plus.svg";
-import trashIcon from "../images/svg/svg_trash.svg";
-import likeIcon from "../images/svg/svg_like.svg";
 import { useState, useEffect } from "react";
 import { api } from "../utils/api";
 import { urlPaths } from "../utils/constants";
@@ -86,7 +84,7 @@ export default function Main({
 
       <section className="places">
         <ul className="place">
-          <Card card={cards} />
+          <Card card={cards} onCardClick={onCardClick} />
         </ul>
       </section>
     </main>
