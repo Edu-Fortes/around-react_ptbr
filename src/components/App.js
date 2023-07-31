@@ -1,8 +1,6 @@
 import Header from "./Header";
 import Main from "./Main";
 import Footer from "./Footer";
-import trashIcon from "../images/svg/svg_trash.svg";
-import likeIcon from "../images/svg/svg_like.svg";
 import PopupWithForm from "./PopupWithForm";
 import Fieldset from "./Fieldset";
 import ImagePopup from "./ImagePopup";
@@ -25,7 +23,6 @@ function App() {
     setIsAddPlacePopupOpen(!isAddPlacePopupOpen);
   }
   function handleCardClick(evt) {
-    console.log(evt.target.closest("div"));
     setSelectedCard(evt.target);
   }
   function closeAllPopups() {

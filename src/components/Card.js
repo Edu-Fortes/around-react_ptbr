@@ -34,5 +34,4 @@ export default function Card({ card, onCardClick }) {
       </div>
     </li>
   ));
-  // props.onCardClick(props.card);
 }
