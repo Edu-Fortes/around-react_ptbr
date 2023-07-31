@@ -32,6 +32,6 @@ In the link below you can check the static page layout
 
 Click on the link below to visit the page under construction:
 
-- [Website EUA Afora - React](https://edu-fortes.github.io/web_project_4_ptbr/)
+- [Website EUA Afora - React](https://edu-fortes.github.io/around-react_ptbr/)
 
 Hope you enjoy it ; )
