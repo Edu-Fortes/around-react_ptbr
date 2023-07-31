@@ -33,66 +33,51 @@ function App() {
   }
 
   return (
-    <>
-      <div className="page__container">
-        <Header />
-        <hr className="hrz-ruler" />
-        <Main
-          onEditProfileClick={handleEditProfileClick}
-          onAddPlaceClick={handleAddPlaceClick}
-          onEditAvatarClick={handleEditAvatarClick}
-          onCardClick={handleCardClick}
-        />
-        <Footer />
-        {/* Modal to Edit Profile */}
-        <PopupWithForm
-          onClose={closeAllPopups}
-          isOpen={isEditProfilePopupOpen}
-          {...form.profile}
-        >
-          <Fieldset {...form.profile.nameInput} />
-          <Fieldset {...form.profile.aboutInput} />
-        </PopupWithForm>
+    <div className="page__container">
+      <Header />
+      <hr className="hrz-ruler" />
+      <Main
+        onEditProfileClick={handleEditProfileClick}
+        onAddPlaceClick={handleAddPlaceClick}
+        onEditAvatarClick={handleEditAvatarClick}
+        onCardClick={handleCardClick}
+      />
+      <Footer />
+      {/* Modal to Edit Profile */}
+      <PopupWithForm
+        onClose={closeAllPopups}
+        isOpen={isEditProfilePopupOpen}
+        {...form.profile}
+      >
+        <Fieldset {...form.profile.nameInput} />
+        <Fieldset {...form.profile.aboutInput} />
+      </PopupWithForm>
 
-        {/* Modal to Add New Place*/}
-        <PopupWithForm
-          onClose={closeAllPopups}
-          isOpen={isAddPlacePopupOpen}
-          {...form.addPlace}
-        >
-          <Fieldset {...form.addPlace.titleInput} />
-          <Fieldset {...form.addPlace.urlInput} />
-        </PopupWithForm>
+      {/* Modal to Add New Place*/}
+      <PopupWithForm
+        onClose={closeAllPopups}
+        isOpen={isAddPlacePopupOpen}
+        {...form.addPlace}
+      >
+        <Fieldset {...form.addPlace.titleInput} />
+        <Fieldset {...form.addPlace.urlInput} />
+      </PopupWithForm>
 
-        {/* Modal to Change user Avatar */}
-        <PopupWithForm
-          onClose={closeAllPopups}
-          isOpen={isEditAvatarPopupOpen}
-          {...form.changeAvatar}
-        >
-          <Fieldset {...form.changeAvatar.input} />
-        </PopupWithForm>
+      {/* Modal to Change user Avatar */}
+      <PopupWithForm
+        onClose={closeAllPopups}
+        isOpen={isEditAvatarPopupOpen}
+        {...form.changeAvatar}
+      >
+        <Fieldset {...form.changeAvatar.input} />
+      </PopupWithForm>
 
-        {/* Delete Alert Modal */}
-        <PopupWithForm {...form.deleteAlert} />
+      {/* Delete Alert Modal */}
+      <PopupWithForm {...form.deleteAlert} />
 
-        {/* Modal to Show Big Image */}
-        <ImagePopup card={selectedCard} onClose={closeAllPopups} />
-
-        {/* MODAL LOADING */}
-        <section id="modal-loading" className="popup">
-          <div className="popup__container popup__container_loading">
-            <div className="popup__spinner"></div>
-          </div>
-        </section>
-      </div>
-
-      {/* TEMPLATE LOADING CARDS */}
-
-      <template id="cards-loading">
-        <li className="place__card place__loading skeleton"></li>
-      </template>
-    </>
+      {/* Modal to Show Big Image */}
+      <ImagePopup card={selectedCard} onClose={closeAllPopups} />
+    </div>
   );
 }
 
