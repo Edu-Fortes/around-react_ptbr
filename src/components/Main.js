@@ -1,9 +1,8 @@
 import pencilIcon from "../images/svg/svg_pencil.svg";
 import plusIcon from "../images/svg/svg_plus.svg";
-import { useState, useEffect } from "react";
-import { api } from "../utils/api";
-import { urlPaths } from "../utils/constants";
+import { useContext } from "react";
 import Card from "./Card";
+import { CurrentUserContext } from "../contexts/CurrentUserContext";
 
 export default function Main({
   onEditProfileClick,
@@ -11,29 +10,8 @@ export default function Main({
   onEditAvatarClick,
   onCardClick,
 }) {
-  //user data state variables
-  const [userName, setUserName] = useState();
-  const [userDescription, setUserDescription] = useState();
-  const [userAvatar, setUserAvatar] = useState();
-
-  //card state variable
-  const [cards, setCards] = useState([]);
-
-  //fetch API to get user data and initial cards
-  useEffect(() => {
-    const user = api.get(urlPaths.user);
-    const cardsList = api.get(urlPaths.cards);
-
-    user.then((res) => {
-      setUserName(res.name);
-      setUserDescription(res.about);
-      setUserAvatar(res.avatar);
-    });
-
-    cardsList.then((res) => {
-      setCards(res);
-    });
-  }, []);
+  //user data context
+  const currentUser = useContext(CurrentUserContext);
 
   return (
     <main className="main">
@@ -41,7 +19,7 @@ export default function Main({
         <div className="profile__item">
           <figure className="profile__fig">
             <img
-              src={userAvatar}
+              src={currentUser.avatar}
               onClick={onEditAvatarClick}
               className="img img_avatar"
               alt="Foto do perfil do usuário"
@@ -49,7 +27,7 @@ export default function Main({
           </figure>
           <ul className="profile__description">
             <li className="list-container">
-              <h1 className="profile__title">{userName}</h1>
+              <h1 className="profile__title">{currentUser.name}</h1>
               <button
                 onClick={onEditProfileClick}
                 className="button button_edit"
@@ -64,7 +42,7 @@ export default function Main({
               </button>
             </li>
             <li>
-              <h2 className="profile__subtitle">{userDescription}</h2>
+              <h2 className="profile__subtitle">{currentUser.about}</h2>
             </li>
           </ul>
         </div>
@@ -84,7 +62,7 @@ export default function Main({
 
       <section className="places">
         <ul className="place">
-          <Card card={cards} onCardClick={onCardClick} />
+          <Card onCardClick={onCardClick} />
         </ul>
       </section>
     </main>

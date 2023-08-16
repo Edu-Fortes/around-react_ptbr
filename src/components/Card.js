@@ -1,11 +1,24 @@
 import trashIcon from "../images/svg/svg_trash.svg";
 import likeIcon from "../images/svg/svg_like.svg";
+import { useContext } from "react";
+import { CurrentUserContext } from "../contexts/CurrentUserContext";
+import { CardContext } from "../contexts/CardContext";
 
-export default function Card({ card, onCardClick }) {
-  return card.map((card) => (
+export default function Card({ onCardClick }) {
+  const currentUser = useContext(CurrentUserContext);
+  const cards = useContext(CardContext);
+
+  return cards.map((card) => (
     <li key={card._id} className="place__card">
       <div className="place__btn-container">
-        <button className="button button_trash" type="button">
+        <button
+          className={`button ${
+            card.owner._id === currentUser._id
+              ? "button_trash button_trash_visible"
+              : "button_trash"
+          }`}
+          type="button"
+        >
           <img
             className="button__image"
             src={trashIcon}
@@ -25,7 +38,11 @@ export default function Card({ card, onCardClick }) {
         <h2 className="place__name">{card.name}</h2>
         <button className="button" type="button">
           <img
-            className="button__like button__like_active"
+            className={`button__like ${
+              card.likes.some((i) => i._id === currentUser._id)
+                ? "button__like_active"
+                : ""
+            }`}
             src={likeIcon}
             alt="Ícone de coração do botão curtir"
           />
