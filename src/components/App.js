@@ -8,6 +8,7 @@ import { form, urlPaths } from "../utils/constants";
 import { useEffect, useState } from "react";
 import { api } from "../utils/api";
 import { CurrentUserContext } from "../contexts/CurrentUserContext";
+import { CardContext } from "../contexts/CardContext";
 
 function App() {
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = useState();
@@ -15,10 +16,16 @@ function App() {
   const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = useState();
   const [selectedCard, setSelectedCard] = useState(false);
   const [currentUser, setCurrentUser] = useState({});
+  const [cards, setCards] = useState([]);
 
   useEffect(() => {
+    //fetch user data from server
     api.get(urlPaths.user).then((res) => {
       setCurrentUser(res);
+    });
+    //fetch card list from server
+    api.get(urlPaths.cards).then((res) => {
+      setCards(res);
     });
   }, []);
 
@@ -46,48 +53,50 @@ function App() {
       <div className="page__container">
         <Header />
         <hr className="hrz-ruler" />
-        <Main
-          onEditProfileClick={handleEditProfileClick}
-          onAddPlaceClick={handleAddPlaceClick}
-          onEditAvatarClick={handleEditAvatarClick}
-          onCardClick={handleCardClick}
-        />
+        <CardContext.Provider value={cards}>
+          <Main
+            onEditProfileClick={handleEditProfileClick}
+            onAddPlaceClick={handleAddPlaceClick}
+            onEditAvatarClick={handleEditAvatarClick}
+            onCardClick={handleCardClick}
+          />
 
-        <Footer />
-        {/* Modal to Edit Profile */}
-        <PopupWithForm
-          onClose={closeAllPopups}
-          isOpen={isEditProfilePopupOpen}
-          {...form.profile}
-        >
-          <Fieldset {...form.profile.nameInput} />
-          <Fieldset {...form.profile.aboutInput} />
-        </PopupWithForm>
+          <Footer />
+          {/* Modal to Edit Profile */}
+          <PopupWithForm
+            onClose={closeAllPopups}
+            isOpen={isEditProfilePopupOpen}
+            {...form.profile}
+          >
+            <Fieldset {...form.profile.nameInput} />
+            <Fieldset {...form.profile.aboutInput} />
+          </PopupWithForm>
 
-        {/* Modal to Add New Place*/}
-        <PopupWithForm
-          onClose={closeAllPopups}
-          isOpen={isAddPlacePopupOpen}
-          {...form.addPlace}
-        >
-          <Fieldset {...form.addPlace.titleInput} />
-          <Fieldset {...form.addPlace.urlInput} />
-        </PopupWithForm>
+          {/* Modal to Add New Place*/}
+          <PopupWithForm
+            onClose={closeAllPopups}
+            isOpen={isAddPlacePopupOpen}
+            {...form.addPlace}
+          >
+            <Fieldset {...form.addPlace.titleInput} />
+            <Fieldset {...form.addPlace.urlInput} />
+          </PopupWithForm>
 
-        {/* Modal to Change user Avatar */}
-        <PopupWithForm
-          onClose={closeAllPopups}
-          isOpen={isEditAvatarPopupOpen}
-          {...form.changeAvatar}
-        >
-          <Fieldset {...form.changeAvatar.input} />
-        </PopupWithForm>
+          {/* Modal to Change user Avatar */}
+          <PopupWithForm
+            onClose={closeAllPopups}
+            isOpen={isEditAvatarPopupOpen}
+            {...form.changeAvatar}
+          >
+            <Fieldset {...form.changeAvatar.input} />
+          </PopupWithForm>
 
-        {/* Delete Alert Modal */}
-        <PopupWithForm {...form.deleteAlert} />
+          {/* Delete Alert Modal */}
+          <PopupWithForm {...form.deleteAlert} />
 
-        {/* Modal to Show Big Image */}
-        <ImagePopup card={selectedCard} onClose={closeAllPopups} />
+          {/* Modal to Show Big Image */}
+          <ImagePopup card={selectedCard} onClose={closeAllPopups} />
+        </CardContext.Provider>
       </div>
     </CurrentUserContext.Provider>
   );
