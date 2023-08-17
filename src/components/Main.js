@@ -9,6 +9,7 @@ export default function Main({
   onAddPlaceClick,
   onEditAvatarClick,
   onCardClick,
+  onCardLike,
 }) {
   //user data context
   const currentUser = useContext(CurrentUserContext);
@@ -61,9 +62,7 @@ export default function Main({
       </section>
 
       <section className="places">
-        <ul className="place">
-          <Card onCardClick={onCardClick} />
-        </ul>
+        <Card onCardClick={onCardClick} onCardLike={onCardLike} />
       </section>
     </main>
   );

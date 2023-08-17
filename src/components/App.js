@@ -48,6 +48,24 @@ function App() {
     setSelectedCard(false);
   }
 
+  function handleCardLike(card) {
+    const isLiked = card.likes.some((i) => i._id === currentUser._id);
+
+    if (!isLiked) {
+      api.put(urlPaths.likes, card._id).then((newCard) => {
+        setCards((state) =>
+          state.map((c) => (c._id === card._id ? newCard : c))
+        );
+      });
+    } else {
+      api.delete(urlPaths.likes, card._id).then((newCard) => {
+        setCards((state) =>
+          state.map((c) => (c._id === card._id ? newCard : c))
+        );
+      });
+    }
+  }
+
   return (
     <CurrentUserContext.Provider value={currentUser}>
       <div className="page__container">
@@ -59,6 +77,7 @@ function App() {
             onAddPlaceClick={handleAddPlaceClick}
             onEditAvatarClick={handleEditAvatarClick}
             onCardClick={handleCardClick}
+            onCardLike={handleCardLike}
           />
 
           <Footer />
