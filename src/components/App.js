@@ -9,6 +9,7 @@ import { useEffect, useState } from "react";
 import { api } from "../utils/api";
 import { CurrentUserContext } from "../contexts/CurrentUserContext";
 import { CardContext } from "../contexts/CardContext";
+import EditProfilePopup from "./EditProfilePopup";
 
 function App() {
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = useState();
@@ -72,6 +73,12 @@ function App() {
       .then(setCards((state) => state.filter((c) => c._id !== card._id)));
   }
 
+  function handleUpdateUser(name, about) {
+    api.patch(urlPaths.user, { name, about });
+    setCurrentUser({ ...currentUser, name, about });
+    closeAllPopups();
+  }
+
   return (
     <CurrentUserContext.Provider value={currentUser}>
       <div className="page__container">
@@ -86,18 +93,12 @@ function App() {
             onCardLike={handleCardLike}
             onCardDelete={handleCardDelete}
           />
-
           <Footer />
-          {/* Modal to Edit Profile */}
-          <PopupWithForm
-            onClose={closeAllPopups}
+          <EditProfilePopup
             isOpen={isEditProfilePopupOpen}
-            {...form.profile}
-          >
-            <Fieldset {...form.profile.nameInput} />
-            <Fieldset {...form.profile.aboutInput} />
-          </PopupWithForm>
-
+            onClose={closeAllPopups}
+            onUpdateUser={handleUpdateUser}
+          />
           {/* Modal to Add New Place*/}
           <PopupWithForm
             onClose={closeAllPopups}

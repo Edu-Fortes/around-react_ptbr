@@ -5,10 +5,14 @@ export default function Fieldset({
   placeholder,
   minLength,
   maxLength,
+  value,
+  onChange,
 }) {
   return (
     <fieldset className="popup__input-container">
       <input
+        value={value}
+        onChange={onChange}
         id={id}
         className={`popup__input popup__input_type_${className}`}
         required
