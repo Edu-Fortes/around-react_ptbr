@@ -20,7 +20,6 @@ export default function EditAvatarPopup({
 
   function handleSubmit(e) {
     e.preventDefault();
-    console.log(avatarRef);
     onUpdateAvatar(avatarRef.current.value);
   }
   return (

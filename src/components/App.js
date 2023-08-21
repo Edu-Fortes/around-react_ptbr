@@ -81,10 +81,10 @@ function App() {
   }
 
   function handleUpdateAvatar(avatarRef) {
-    setCurrentUser({ ...currentUser, avatar: avatarRef });
     api
-      .patch(urlPaths.user, { ...currentUser, link: avatarRef })
+      .patch(urlPaths.changeAvatar, { link: avatarRef })
       .catch((err) => console.log(err));
+    setCurrentUser({ ...currentUser, avatar: avatarRef });
     console.log(currentUser);
     console.log(avatarRef);
     closeAllPopups();
