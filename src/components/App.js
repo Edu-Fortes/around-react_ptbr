@@ -84,9 +84,8 @@ function App() {
     api
       .patch(urlPaths.changeAvatar, { link: avatarRef })
       .catch((err) => console.log(err));
-    setCurrentUser({ ...currentUser, avatar: avatarRef });
-    console.log(currentUser);
     console.log(avatarRef);
+    setCurrentUser({ ...currentUser, avatar: avatarRef });
     closeAllPopups();
   }
 

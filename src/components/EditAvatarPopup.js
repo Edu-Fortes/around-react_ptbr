@@ -1,5 +1,4 @@
 import PopupWithForm from "./PopupWithForm";
-import Fieldset from "./Fieldset";
 import { form } from "../utils/constants";
 import { useRef } from "react";
 
@@ -16,15 +15,17 @@ export default function EditAvatarPopup({
 
   const handleFormReset = () => {
     onClose();
+    avatarRef.current.value = "";
   };
 
   function handleSubmit(e) {
     e.preventDefault();
     onUpdateAvatar(avatarRef.current.value);
+    avatarRef.current.value = "";
   }
   return (
     <PopupWithForm
-      onClose={onClose}
+      onClose={handleFormReset}
       isOpen={isOpen}
       onSubmit={handleSubmit}
       {...form.changeAvatar}
