@@ -10,6 +10,7 @@ import { api } from "../utils/api";
 import { CurrentUserContext } from "../contexts/CurrentUserContext";
 import { CardContext } from "../contexts/CardContext";
 import EditProfilePopup from "./EditProfilePopup";
+import EditAvatarPopup from "./EditAvatarPopup";
 
 function App() {
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = useState();
@@ -79,6 +80,16 @@ function App() {
     closeAllPopups();
   }
 
+  function handleUpdateAvatar(avatarRef) {
+    setCurrentUser({ ...currentUser, avatar: avatarRef });
+    api
+      .patch(urlPaths.user, { ...currentUser, link: avatarRef })
+      .catch((err) => console.log(err));
+    console.log(currentUser);
+    console.log(avatarRef);
+    closeAllPopups();
+  }
+
   return (
     <CurrentUserContext.Provider value={currentUser}>
       <div className="page__container">
@@ -109,14 +120,12 @@ function App() {
             <Fieldset {...form.addPlace.urlInput} />
           </PopupWithForm>
 
-          {/* Modal to Change user Avatar */}
-          <PopupWithForm
-            onClose={closeAllPopups}
+          <EditAvatarPopup
             isOpen={isEditAvatarPopupOpen}
-            {...form.changeAvatar}
-          >
-            <Fieldset {...form.changeAvatar.input} />
-          </PopupWithForm>
+            onClose={closeAllPopups}
+            onUpdateAvatar={handleUpdateAvatar}
+            {...form.changeAvatar.input}
+          />
 
           {/* Delete Alert Modal */}
           <PopupWithForm {...form.deleteAlert} />

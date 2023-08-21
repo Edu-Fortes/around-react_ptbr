@@ -7,10 +7,12 @@ export default function Fieldset({
   maxLength,
   value,
   onChange,
+  ref,
 }) {
   return (
     <fieldset className="popup__input-container">
       <input
+        ref={ref}
         value={value}
         onChange={onChange}
         id={id}
