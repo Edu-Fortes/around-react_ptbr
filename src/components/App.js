@@ -2,7 +2,6 @@ import Header from "./Header";
 import Main from "./Main";
 import Footer from "./Footer";
 import PopupWithForm from "./PopupWithForm";
-import Fieldset from "./Fieldset";
 import ImagePopup from "./ImagePopup";
 import { form, urlPaths } from "../utils/constants";
 import { useEffect, useState } from "react";
@@ -11,6 +10,7 @@ import { CurrentUserContext } from "../contexts/CurrentUserContext";
 import { CardContext } from "../contexts/CardContext";
 import EditProfilePopup from "./EditProfilePopup";
 import EditAvatarPopup from "./EditAvatarPopup";
+import AddPlacePopup from "./AddPlacePopup";
 
 function App() {
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = useState();
@@ -84,8 +84,15 @@ function App() {
     api
       .patch(urlPaths.changeAvatar, { link: avatarRef })
       .catch((err) => console.log(err));
-    console.log(avatarRef);
     setCurrentUser({ ...currentUser, avatar: avatarRef });
+    closeAllPopups();
+  }
+
+  function handleAddPlaceSubmit(newCard) {
+    api
+      .post(urlPaths.cards, { link: newCard.link, name: newCard.name })
+      .then((cardData) => setCards([cardData, ...cards]))
+      .catch((err) => console.log(err));
     closeAllPopups();
   }
 
@@ -109,15 +116,12 @@ function App() {
             onClose={closeAllPopups}
             onUpdateUser={handleUpdateUser}
           />
-          {/* Modal to Add New Place*/}
-          <PopupWithForm
+
+          <AddPlacePopup
             onClose={closeAllPopups}
             isOpen={isAddPlacePopupOpen}
-            {...form.addPlace}
-          >
-            <Fieldset {...form.addPlace.titleInput} />
-            <Fieldset {...form.addPlace.urlInput} />
-          </PopupWithForm>
+            onAddPlaceSubmit={handleAddPlaceSubmit}
+          />
 
           <EditAvatarPopup
             isOpen={isEditAvatarPopupOpen}
