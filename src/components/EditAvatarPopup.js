@@ -21,7 +21,7 @@ export default function EditAvatarPopup({
   function handleSubmit(e) {
     e.preventDefault();
     onUpdateAvatar(avatarRef.current.value);
-    avatarRef.current.value = "";
+    handleFormReset();
   }
   return (
     <PopupWithForm

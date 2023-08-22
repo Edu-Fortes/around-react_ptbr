@@ -9,11 +9,15 @@ export default function AddPlacePopup({ onClose, isOpen, onAddPlaceSubmit }) {
   function handleSubmit(e) {
     e.preventDefault();
     onAddPlaceSubmit(newCard);
+    handleFormReset();
   }
 
   function handleFormReset() {
     onClose();
-    setNewCard();
+    setNewCard({
+      name: "",
+      link: "",
+    });
   }
 
   return (
@@ -24,10 +28,12 @@ export default function AddPlacePopup({ onClose, isOpen, onAddPlaceSubmit }) {
       {...form.addPlace}
     >
       <Fieldset
+        value={newCard.name}
         onChange={(e) => setNewCard({ ...newCard, name: e.target.value })}
         {...form.addPlace.titleInput}
       />
       <Fieldset
+        value={newCard.link}
         onChange={(e) => setNewCard({ ...newCard, link: e.target.value })}
         {...form.addPlace.urlInput}
       />

@@ -85,7 +85,6 @@ function App() {
       .patch(urlPaths.changeAvatar, { link: avatarRef })
       .catch((err) => console.log(err));
     setCurrentUser({ ...currentUser, avatar: avatarRef });
-    closeAllPopups();
   }
 
   function handleAddPlaceSubmit(newCard) {
@@ -93,7 +92,6 @@ function App() {
       .post(urlPaths.cards, { link: newCard.link, name: newCard.name })
       .then((cardData) => setCards([cardData, ...cards]))
       .catch((err) => console.log(err));
-    closeAllPopups();
   }
 
   return (
