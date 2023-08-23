@@ -19,16 +19,24 @@ function App() {
   const [selectedCard, setSelectedCard] = useState(false);
   const [currentUser, setCurrentUser] = useState({});
   const [cards, setCards] = useState([]);
+  const [loadingProfile, setLoadingProfile] = useState(true);
+  const [loadingCards, setLoadingCards] = useState(true);
 
   useEffect(() => {
     //fetch user data from server
-    api.get(urlPaths.user).then((res) => {
-      setCurrentUser(res);
-    });
+    api
+      .get(urlPaths.user)
+      .then((res) => {
+        setCurrentUser(res);
+      })
+      .finally(() => setLoadingProfile(false));
     //fetch card list from server
-    api.get(urlPaths.cards).then((res) => {
-      setCards(res);
-    });
+    api
+      .get(urlPaths.cards)
+      .then((res) => {
+        setCards(res);
+      })
+      .finally(() => setLoadingCards(false));
   }, []);
 
   function handleEditAvatarClick() {
@@ -107,6 +115,7 @@ function App() {
             onCardClick={handleCardClick}
             onCardLike={handleCardLike}
             onCardDelete={handleCardDelete}
+            isProfileLoading={loadingProfile}
           />
           <Footer />
           <EditProfilePopup
