@@ -116,6 +116,7 @@ function App() {
             onCardLike={handleCardLike}
             onCardDelete={handleCardDelete}
             isProfileLoading={loadingProfile}
+            isCardsLoading={loadingCards}
           />
           <Footer />
           <EditProfilePopup

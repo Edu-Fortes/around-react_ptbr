@@ -66,5 +66,6 @@ export default function Card({ onCardClick, onCardLike, onCardDelete }) {
       </li>
     );
   });
+
   return <ul className="place">{cardList}</ul>;
 }

@@ -4,6 +4,7 @@ import { useContext } from "react";
 import Card from "./Card";
 import { CurrentUserContext } from "../contexts/CurrentUserContext";
 import LoadingProfile from "./LoadingProfile";
+import LoadingCards from "./LoadingCards";
 
 export default function Main({
   onEditProfileClick,
@@ -13,6 +14,7 @@ export default function Main({
   onCardLike,
   onCardDelete,
   isProfileLoading,
+  isCardsLoading,
 }) {
   //user data context
   const currentUser = useContext(CurrentUserContext);
@@ -69,11 +71,15 @@ export default function Main({
       )}
 
       <section className="places">
-        <Card
-          onCardClick={onCardClick}
-          onCardLike={onCardLike}
-          onCardDelete={onCardDelete}
-        />
+        {isCardsLoading ? (
+          <LoadingCards />
+        ) : (
+          <Card
+            onCardClick={onCardClick}
+            onCardLike={onCardLike}
+            onCardDelete={onCardDelete}
+          />
+        )}
       </section>
     </main>
   );
