@@ -7,7 +7,7 @@
   }
 }
 
-.button__count_spinner {
+.button_spinner {
   border: 0.2rem solid #a9a9a9; /* Light grey */
   border-top: 0.2rem solid rgb(0 0 0 / 80%);
   border-radius: 50%;

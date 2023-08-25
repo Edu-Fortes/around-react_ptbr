@@ -12,10 +12,6 @@ import EditProfilePopup from "./EditProfilePopup";
 import EditAvatarPopup from "./EditAvatarPopup";
 import AddPlacePopup from "./AddPlacePopup";
 
-const loadingConf = {
-  btnLike: false,
-};
-
 function App() {
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = useState();
   const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = useState();
@@ -25,8 +21,6 @@ function App() {
   const [cards, setCards] = useState([]);
   const [loadingProfile, setLoadingProfile] = useState(true);
   const [loadingCards, setLoadingCards] = useState(true);
-  const [loadingLike, setLoadingLike] = useState(false);
-  const [loading, setLoading] = useState(loadingConf);
 
   useEffect(() => {
     //fetch user data from server
@@ -71,7 +65,6 @@ function App() {
     const isLiked = card.likes.some((i) => i._id === currentUser._id);
 
     if (!isLiked) {
-      setLoadingLike(true);
       api
         .put(urlPaths.likes, card._id)
         .then((newCard) => {
@@ -79,11 +72,8 @@ function App() {
             state.map((c) => (c._id === card._id ? newCard : c))
           );
         })
-        .catch((err) => console.log(err))
-
-        .finally(() => setLoadingLike(false));
+        .catch((err) => console.log(err));
     } else {
-      setLoadingLike(true);
       api
         .delete(urlPaths.likes, card._id)
         .then((newCard) => {
@@ -91,9 +81,7 @@ function App() {
             state.map((c) => (c._id === card._id ? newCard : c))
           );
         })
-        .catch((err) => console.log(err))
-
-        .finally(() => setLoadingLike(false));
+        .catch((err) => console.log(err));
     }
   }
 
@@ -139,7 +127,6 @@ function App() {
             onCardDelete={handleCardDelete}
             isProfileLoading={loadingProfile}
             isCardsLoading={loadingCards}
-            isLikeLoading={loadingLike}
           />
           <Footer />
           <EditProfilePopup
