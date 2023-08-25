@@ -5,7 +5,7 @@ import PopupWithForm from "./PopupWithForm";
 import ImagePopup from "./ImagePopup";
 import { form, urlPaths } from "../utils/constants";
 import { useEffect, useState } from "react";
-import { api } from "../utils/api";
+import api from "../utils/api";
 import { CurrentUserContext } from "../contexts/CurrentUserContext";
 import { CardContext } from "../contexts/CardContext";
 import EditProfilePopup from "./EditProfilePopup";

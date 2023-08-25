@@ -3,4 +3,4 @@ import { urlPaths } from "./constants";
 
 const api = new Api(urlPaths);
 
-export { api };
+export default api;
