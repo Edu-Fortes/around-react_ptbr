@@ -15,6 +15,7 @@ export default function Main({
   onCardDelete,
   isProfileLoading,
   isCardsLoading,
+  isLikeLoading,
 }) {
   //user data context
   const currentUser = useContext(CurrentUserContext);
@@ -78,6 +79,7 @@ export default function Main({
             onCardClick={onCardClick}
             onCardLike={onCardLike}
             onCardDelete={onCardDelete}
+            isLikeLoading={isLikeLoading}
           />
         )}
       </section>

@@ -4,7 +4,12 @@ import { useContext } from "react";
 import { CurrentUserContext } from "../contexts/CurrentUserContext";
 import { CardContext } from "../contexts/CardContext";
 
-export default function Card({ onCardClick, onCardLike, onCardDelete }) {
+export default function Card({
+  onCardClick,
+  onCardLike,
+  onCardDelete,
+  isLikeLoading,
+}) {
   const currentUser = useContext(CurrentUserContext);
   const cardsArray = useContext(CardContext);
 
@@ -19,9 +24,7 @@ export default function Card({ onCardClick, onCardLike, onCardDelete }) {
     //checks if card was liked by current user
     const isLiked = card.likes.some((i) => i._id === currentUser._id);
     //defines class name to active or deactive like icon
-    const cardLikeButtonClassName = `'button__like' ${
-      isLiked ? "button__like_active" : ""
-    }`;
+    const cardLikeButtonClassName = `${isLiked ? "button__like_active" : ""}`;
 
     function handleLikeClick() {
       onCardLike(card);
@@ -53,15 +56,27 @@ export default function Card({ onCardClick, onCardLike, onCardDelete }) {
         </figure>
         <div className="place__content">
           <h2 className="place__name">{card.name}</h2>
-          <button className="button" type="button">
-            <img
-              onClick={handleLikeClick}
-              className={`button__like ${cardLikeButtonClassName}`}
-              src={likeIcon}
-              alt="Ícone de coração do botão curtir"
-            />
-            <span className="button__count">{card.likes.length}</span>
-          </button>
+          {isLikeLoading ? (
+            <button className="button button__count_spinner" type="button">
+              {/* <img
+                onClick={handleLikeClick}
+                className={`button__like ${cardLikeButtonClassName}`}
+                src={likeIcon}
+                alt="Ícone de coração do botão curtir"
+              />
+              <span className="button__count"></span> */}
+            </button>
+          ) : (
+            <button className="button" type="button">
+              <img
+                onClick={handleLikeClick}
+                className={`button__like ${cardLikeButtonClassName}`}
+                src={likeIcon}
+                alt="Ícone de coração do botão curtir"
+              />
+              <span className="button__count">{card.likes.length}</span>
+            </button>
+          )}
         </div>
       </li>
     );

@@ -12,6 +12,10 @@ import EditProfilePopup from "./EditProfilePopup";
 import EditAvatarPopup from "./EditAvatarPopup";
 import AddPlacePopup from "./AddPlacePopup";
 
+const loadingConf = {
+  btnLike: false,
+};
+
 function App() {
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = useState();
   const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = useState();
@@ -21,6 +25,8 @@ function App() {
   const [cards, setCards] = useState([]);
   const [loadingProfile, setLoadingProfile] = useState(true);
   const [loadingCards, setLoadingCards] = useState(true);
+  const [loadingLike, setLoadingLike] = useState(false);
+  const [loading, setLoading] = useState(loadingConf);
 
   useEffect(() => {
     //fetch user data from server
@@ -29,6 +35,7 @@ function App() {
       .then((res) => {
         setCurrentUser(res);
       })
+      .catch((err) => console.log(err))
       .finally(() => setLoadingProfile(false));
     //fetch card list from server
     api
@@ -36,6 +43,8 @@ function App() {
       .then((res) => {
         setCards(res);
       })
+      .catch((err) => console.log(err))
+
       .finally(() => setLoadingCards(false));
   }, []);
 
@@ -62,28 +71,41 @@ function App() {
     const isLiked = card.likes.some((i) => i._id === currentUser._id);
 
     if (!isLiked) {
-      api.put(urlPaths.likes, card._id).then((newCard) => {
-        setCards((state) =>
-          state.map((c) => (c._id === card._id ? newCard : c))
-        );
-      });
+      setLoadingLike(true);
+      api
+        .put(urlPaths.likes, card._id)
+        .then((newCard) => {
+          setCards((state) =>
+            state.map((c) => (c._id === card._id ? newCard : c))
+          );
+        })
+        .catch((err) => console.log(err))
+
+        .finally(() => setLoadingLike(false));
     } else {
-      api.delete(urlPaths.likes, card._id).then((newCard) => {
-        setCards((state) =>
-          state.map((c) => (c._id === card._id ? newCard : c))
-        );
-      });
+      setLoadingLike(true);
+      api
+        .delete(urlPaths.likes, card._id)
+        .then((newCard) => {
+          setCards((state) =>
+            state.map((c) => (c._id === card._id ? newCard : c))
+          );
+        })
+        .catch((err) => console.log(err))
+
+        .finally(() => setLoadingLike(false));
     }
   }
 
   function handleCardDelete(card) {
     api
       .delete(urlPaths.cards, card._id)
-      .then(setCards((state) => state.filter((c) => c._id !== card._id)));
+      .then(setCards((state) => state.filter((c) => c._id !== card._id)))
+      .catch((err) => console.log(err));
   }
 
   function handleUpdateUser(name, about) {
-    api.patch(urlPaths.user, { name, about });
+    api.patch(urlPaths.user, { name, about }).catch((err) => console.log(err));
     setCurrentUser({ ...currentUser, name, about });
     closeAllPopups();
   }
@@ -117,6 +139,7 @@ function App() {
             onCardDelete={handleCardDelete}
             isProfileLoading={loadingProfile}
             isCardsLoading={loadingCards}
+            isLikeLoading={loadingLike}
           />
           <Footer />
           <EditProfilePopup
