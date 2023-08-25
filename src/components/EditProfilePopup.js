@@ -4,7 +4,13 @@ import { form } from "../utils/constants";
 import { useState, useContext, useEffect } from "react";
 import { CurrentUserContext } from "../contexts/CurrentUserContext";
 
-export default function EditProfilePopup({ isOpen, onClose, onUpdateUser }) {
+export default function EditProfilePopup({
+  isOpen,
+  isLoading,
+  onClose,
+  onUpdateUser,
+  onBtnClick,
+}) {
   const currentUser = useContext(CurrentUserContext);
   const [name, setName] = useState();
   const [about, setAbout] = useState();
@@ -22,13 +28,15 @@ export default function EditProfilePopup({ isOpen, onClose, onUpdateUser }) {
 
   function handleSubmit(e) {
     e.preventDefault();
+    onBtnClick();
     onUpdateUser(name, about);
   }
   return (
     <PopupWithForm
       onClose={handleFormReset}
-      isOpen={isOpen}
       onSubmit={handleSubmit}
+      isOpen={isOpen}
+      isLoading={isLoading}
       {...form.profile}
     >
       <Fieldset

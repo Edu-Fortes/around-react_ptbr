@@ -21,6 +21,7 @@ function App() {
   const [cards, setCards] = useState([]);
   const [loadingProfile, setLoadingProfile] = useState(true);
   const [loadingCards, setLoadingCards] = useState(true);
+  const [isBtnLoading, setIsBtnLoading] = useState(false);
 
   useEffect(() => {
     //fetch user data from server
@@ -54,6 +55,10 @@ function App() {
   function handleCardClick(evt) {
     setSelectedCard(evt.target);
   }
+  function handleBtnClick() {
+    setIsBtnLoading(true);
+  }
+
   function closeAllPopups() {
     setIsEditProfilePopupOpen(false);
     setIsAddPlacePopupOpen(false);
@@ -93,7 +98,10 @@ function App() {
   }
 
   function handleUpdateUser(name, about) {
-    api.patch(urlPaths.user, { name, about }).catch((err) => console.log(err));
+    api
+      .patch(urlPaths.user, { name, about })
+      .catch((err) => console.log(err))
+      .finally(() => setIsBtnLoading(false));
     setCurrentUser({ ...currentUser, name, about });
     closeAllPopups();
   }
@@ -101,7 +109,8 @@ function App() {
   function handleUpdateAvatar(avatarRef) {
     api
       .patch(urlPaths.changeAvatar, { link: avatarRef })
-      .catch((err) => console.log(err));
+      .catch((err) => console.log(err))
+      .finally(() => setIsBtnLoading(false));
     setCurrentUser({ ...currentUser, avatar: avatarRef });
   }
 
@@ -131,8 +140,10 @@ function App() {
           <Footer />
           <EditProfilePopup
             isOpen={isEditProfilePopupOpen}
+            isLoading={isBtnLoading}
             onClose={closeAllPopups}
             onUpdateUser={handleUpdateUser}
+            onBtnClick={handleBtnClick}
           />
 
           <AddPlacePopup
@@ -143,8 +154,10 @@ function App() {
 
           <EditAvatarPopup
             isOpen={isEditAvatarPopupOpen}
+            isLoading={isBtnLoading}
             onClose={closeAllPopups}
             onUpdateAvatar={handleUpdateAvatar}
+            onBtnClick={handleBtnClick}
             {...form.changeAvatar.input}
           />
 

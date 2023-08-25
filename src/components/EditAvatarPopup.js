@@ -5,7 +5,9 @@ import { useRef } from "react";
 export default function EditAvatarPopup({
   onClose,
   isOpen,
+  isLoading,
   onUpdateAvatar,
+  onBtnClick,
   id,
   className,
   type,
@@ -21,13 +23,16 @@ export default function EditAvatarPopup({
   function handleSubmit(e) {
     e.preventDefault();
     onUpdateAvatar(avatarRef.current.value);
+    onBtnClick();
     handleFormReset();
   }
   return (
     <PopupWithForm
       onClose={handleFormReset}
       isOpen={isOpen}
+      isLoading={isLoading}
       onSubmit={handleSubmit}
+      onBtnClick={onBtnClick}
       {...form.changeAvatar}
     >
       <fieldset className="popup__input-container">

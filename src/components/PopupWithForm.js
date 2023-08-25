@@ -3,8 +3,8 @@ import closeIcon from "../images/svg/svg_close.svg";
 export default function PopupWithForm({
   title,
   name,
-  btnText,
   isOpen,
+  isLoading,
   onClose,
   children,
   onSubmit,
@@ -28,9 +28,15 @@ export default function PopupWithForm({
           >
             <h2 className="popup__title">{title}</h2>
             {children}
-            <button className="button button_save" type="submit">
-              {btnText}
-            </button>
+            {isLoading ? (
+              <button className="button button_save loading" type="submit">
+                Salvando
+              </button>
+            ) : (
+              <button className="button button_save" type="submit">
+                Salvar
+              </button>
+            )}
           </form>
         </div>
       </section>
