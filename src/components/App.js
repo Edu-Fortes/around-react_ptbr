@@ -118,7 +118,8 @@ function App() {
     api
       .post(urlPaths.cards, { link: newCard.link, name: newCard.name })
       .then((cardData) => setCards([cardData, ...cards]))
-      .catch((err) => console.log(err));
+      .catch((err) => console.log(err))
+      .finally(() => setIsBtnLoading(false));
   }
 
   return (
@@ -148,8 +149,10 @@ function App() {
 
           <AddPlacePopup
             onClose={closeAllPopups}
-            isOpen={isAddPlacePopupOpen}
             onAddPlaceSubmit={handleAddPlaceSubmit}
+            onBtnClick={handleBtnClick}
+            isOpen={isAddPlacePopupOpen}
+            isLoading={isBtnLoading}
           />
 
           <EditAvatarPopup

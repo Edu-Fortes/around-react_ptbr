@@ -3,12 +3,19 @@ import Fieldset from "./Fieldset";
 import { form } from "../utils/constants";
 import { useState } from "react";
 
-export default function AddPlacePopup({ onClose, isOpen, onAddPlaceSubmit }) {
+export default function AddPlacePopup({
+  isOpen,
+  isLoading,
+  onClose,
+  onAddPlaceSubmit,
+  onBtnClick,
+}) {
   const [newCard, setNewCard] = useState({ name: "", link: "" });
 
   function handleSubmit(e) {
     e.preventDefault();
     onAddPlaceSubmit(newCard);
+    onBtnClick();
     handleFormReset();
   }
 
@@ -22,9 +29,11 @@ export default function AddPlacePopup({ onClose, isOpen, onAddPlaceSubmit }) {
 
   return (
     <PopupWithForm
-      onClose={handleFormReset}
       isOpen={isOpen}
+      isLoading={isLoading}
+      onClose={handleFormReset}
       onSubmit={handleSubmit}
+      onBtnClick={onBtnClick}
       {...form.addPlace}
     >
       <Fieldset

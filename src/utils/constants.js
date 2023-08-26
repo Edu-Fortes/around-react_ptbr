@@ -13,6 +13,7 @@ const form = {
     name: "profile",
     title: "Editar perfil",
     btnText: "Salvar",
+    loadingBtnText: "Salvando",
     nameInput: {
       id: "",
       className: "name",
@@ -34,6 +35,7 @@ const form = {
     name: "addPic",
     title: "Novo local",
     btnText: "Criar",
+    loadingBtnText: "Criando",
     titleInput: {
       id: "title-input",
       className: "place",
@@ -53,6 +55,7 @@ const form = {
     name: "avatar",
     title: "Alterar a foto do perfil",
     btnText: "Salvar",
+    loadingBtnText: "Slavando",
     input: {
       id: "avatar-input",
       className: "img",
