@@ -1,6 +1,6 @@
-import Api from "../components/Api";
+import Client from "../components/Client";
 import { urlPaths } from "./constants";
 
-const api = new Api(urlPaths);
+const api = new Client(urlPaths);
 
 export default api;

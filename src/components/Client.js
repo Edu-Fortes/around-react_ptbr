@@ -1,4 +1,4 @@
-export default class Api {
+export default class Client {
   constructor({ baseUrl, authorization }) {
     this._baseUrl = baseUrl;
     this._authorization = authorization;
